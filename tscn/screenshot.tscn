@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bbr8ffkxaerc7"]
+
+[ext_resource type="PackedScene" uid="uid://crrbtfcpgehym" path="res://tscn/world.tscn" id="1_world"]
+[ext_resource type="Script" path="res://scripts/screenshot.gd" id="2_script"]
+
+[node name="ScreenshotScene" type="Node3D"]
+script = ExtResource("2_script")
+
+[node name="World" parent="." instance=ExtResource("1_world")]

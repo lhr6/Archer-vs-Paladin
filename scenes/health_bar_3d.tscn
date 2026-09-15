@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bxi2meth18qmi"]
+
+[ext_resource type="Script" path="res://scripts/health_bar_3d.gd" id="1_script"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_frame"]
+size = Vector2(1.06, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="Mat_frame"]
+shading_mode = 0
+albedo_color = Color(0.95, 0.95, 0.95, 1)
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_bg"]
+size = Vector2(1, 0.14)
+
+[sub_resource type="StandardMaterial3D" id="Mat_bg"]
+shading_mode = 0
+albedo_color = Color(0.07, 0.07, 0.09, 1)
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_fill"]
+size = Vector2(1, 0.14)
+
+[sub_resource type="StandardMaterial3D" id="Mat_fill"]
+shading_mode = 0
+albedo_color = Color(0.2, 0.72, 0.28, 1)
+disable_receive_shadows = true
+
+[node name="HealthBar3D" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Billboard" type="Node3D" parent="."]
+
+[node name="Frame" type="MeshInstance3D" parent="Billboard"]
+mesh = SubResource("QuadMesh_frame")
+surface_material_override/0 = SubResource("Mat_frame")
+
+[node name="Background" type="MeshInstance3D" parent="Billboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.005)
+mesh = SubResource("QuadMesh_bg")
+surface_material_override/0 = SubResource("Mat_bg")
+
+[node name="Fill" type="Node3D" parent="Billboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.01)
+
+[node name="FillMesh" type="MeshInstance3D" parent="Billboard/Fill"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+mesh = SubResource("QuadMesh_fill")
+surface_material_override/0 = SubResource("Mat_fill")

@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://crrbtfcpgehym"]
+
+[ext_resource type="PackedScene" uid="uid://0nhxf5qfk441" path="res://scenes/player.tscn" id="1_player"]
+[ext_resource type="Texture2D" uid="uid://cchml6c1ka28t" path="res://assets/textures/ground/brick_color.jpg" id="3_grass_color"]
+[ext_resource type="Texture2D" uid="uid://dix6xrrjry1dn" path="res://assets/textures/ground/brick_normal.jpg" id="4_grass_normal"]
+[ext_resource type="Texture2D" uid="uid://cn3u3i0sq3ugc" path="res://assets/textures/ground/brick_roughness.jpg" id="5_grass_rough"]
+[ext_resource type="Texture2D" uid="uid://be5nwb75o3y7e" path="res://assets/textures/ground/brick_ao.jpg" id="6_grass_ao"]
+[ext_resource type="PackedScene" uid="uid://cenemyscene01" path="res://scenes/enemy.tscn" id="7_enemy"]
+[ext_resource type="PackedScene" uid="uid://chudscene0001" path="res://scenes/hud.tscn" id="8_hud"]
+
+[sub_resource type="ProceduralSkyMaterial" id="SkyMaterial_1"]
+sky_top_color = Color(0.35, 0.58, 0.88, 1)
+sky_horizon_color = Color(0.8, 0.8, 0.76, 1)
+sky_curve = 0.08
+ground_bottom_color = Color(0.28, 0.26, 0.23, 1)
+ground_horizon_color = Color(0.62, 0.56, 0.48, 1)
+sun_curve = 0.08
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("SkyMaterial_1")
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+background_color = Color(0.2, 0.3, 0.4, 1)
+sky = SubResource("Sky_1")
+ambient_light_source = 3
+ambient_light_color = Color(0.5, 0.5, 0.5, 1)
+ambient_light_energy = 1.4
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_exposure = 1.2
+fog_enabled = true
+fog_light_color = Color(0.62, 0.6, 0.58, 1)
+fog_density = 0.005
+fog_sky_affect = 0.35
+
+[sub_resource type="BoxMesh" id="BoxMesh_l732f"]
+size = Vector3(200, 0.5, 200)
+
+[sub_resource type="StandardMaterial3D" id="MatGround_1"]
+albedo_texture = ExtResource("3_grass_color")
+roughness_texture = ExtResource("5_grass_rough")
+normal_texture = ExtResource("4_grass_normal")
+ao_texture = ExtResource("6_grass_ao")
+uv1_scale = Vector3(120, 120, 1)
+texture_filter = 5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l732f"]
+size = Vector3(200, 0.5, 200)
+
+[node name="World" type="Node3D" unique_id=1357205644]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2107041539]
+transform = Transform3D(0.642788, -0.5, 0.580153, -0.286788, 0.5, 0.815208, -0.710368, -0.707107, 0, 3, 10, 5)
+light_energy = 1.6
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=162012698]
+environment = SubResource("Environment_1")
+
+[node name="Player" parent="." unique_id=702207823 instance=ExtResource("1_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Enemy" parent="." unique_id=133455177 instance=ExtResource("7_enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.41052604, 8)
+
+[node name="HUD" parent="." unique_id=1620553668 instance=ExtResource("8_hud")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=857887975]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1561000971]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.026, 0, 0)
+mesh = SubResource("BoxMesh_l732f")
+surface_material_override/0 = SubResource("MatGround_1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1709937076]
+shape = SubResource("BoxShape3D_l732f")

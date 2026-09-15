@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://0nhxf5qfk441"]
+
+[ext_resource type="PackedScene" uid="uid://b8io8nmygebhr" path="res://assets/model/archer/archer.glb" id="1_archer"]
+[ext_resource type="Script" uid="uid://cwny0brnjmhqb" path="res://scripts/player_controller.gd" id="2_script"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="3_health"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
+radius = 0.25
+height = 1.8
+
+[node name="Player" type="CharacterBody3D" unique_id=1232445075]
+script = ExtResource("2_script")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_health")
+max_hp = 100.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1693013412]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_1")
+
+[node name="Model" parent="." unique_id=930890609 instance=ExtResource("1_archer")]
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=1967487168]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="Camera" type="Camera3D" parent="CameraPivot" unique_id=1201065754]
+; 相机后退到 5.8m（原 4m）：角色在画面里更小，减少对准星和前方敌人的遮挡
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.8)
+fov = 70.0
+near = 0.1
+far = 100.0

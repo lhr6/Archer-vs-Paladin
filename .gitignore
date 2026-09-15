@@ -1,0 +1,31 @@
+# ===== Godot 4 =====
+
+# 导入缓存与编辑器数据（打开编辑器时自动重新生成）
+.godot/
+
+# Godot 运行时用户数据（日志、缓存等）
+Godot/
+
+# ===== 本项目临时产物 =====
+
+# 场景验证截图
+_screenshots/
+
+# 根目录临时截图（如 _vortex_*.png）
+/_*.png
+/_*.png.import
+
+# 工作区工具数据
+.workbuddy/
+
+# ===== Windows =====
+
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ===== Godot 导出产物 =====
+
+*.pck
+*.zip
+*.exe

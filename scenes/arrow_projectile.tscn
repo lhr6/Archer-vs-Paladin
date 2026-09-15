@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://carrowproj001"]
+
+[ext_resource type="Script" path="res://scripts/arrow_projectile.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://assets/model/item/arrow/arrow.glb" id="2_model"]
+
+[node name="Arrow" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Model" parent="." instance=ExtResource("2_model")]
+; 模型箭尖朝 +Z，而 look_at 让节点的 -Z 朝向目标，
+; 因此模型绕 Y 轴转 180°（basis X=(-1,0,0)、Z=(0,0,-1)），箭尖才朝飞行方向
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
